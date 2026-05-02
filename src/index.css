@@ -1,0 +1,52 @@
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@300;400;500;600;700&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-sans: ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  --font-mono: "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  
+  --color-void: #F8FAFC;
+  --color-panel: #FFFFFF;
+  --color-panel-dark: #F1F5F9;
+  --color-panel2: #FFFFFF;
+  --color-panel3: #F1F5F9;
+  
+  --color-border-100: #E2E8F0;
+  --color-border-200: #CBD5E1;
+  --color-border-300: #94A3B8;
+  
+  --color-t-100: #0F172A;
+  --color-t-200: #475569;
+  --color-t-300: #64748B;
+  
+  --color-cmd: #F27D26;
+  --color-cmd-light: rgba(242, 125, 38, 0.15);
+  
+  --color-status-ok: #22c55e;
+  --color-status-warn: #eab308;
+  --color-status-err: #ef4444;
+  --color-status-info: #3b82f6;
+
+  --radius-xl: 0.5rem;
+  --radius-2xl: 0.5rem;
+}
+
+@layer base {
+  body {
+    @apply bg-void text-t-100 font-sans antialiased selection:bg-cmd selection:text-white;
+  }
+}
+
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  @apply bg-border-200 rounded-sm;
+}
+::-webkit-scrollbar-thumb:hover {
+  @apply bg-border-300;
+}

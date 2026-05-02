@@ -1,0 +1,1436 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Handoff projets / Projects handoff - Big House Marketing</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg-deepest: #07091a;
+  --bg-deep: #0a0e27;
+  --bg-surface: #10152f;
+  --bg-card: #1A1A2E;
+  --bg-elevated: #1f243f;
+  --border: #2a2f4a;
+  --border-subtle: #1e2340;
+  --text-primary: #f1f5f9;
+  --text-secondary: #94a3b8;
+  --text-tertiary: #64748b;
+  --text-quaternary: #475569;
+  --cyan: #29B6F6;
+  --orange: #FF6B00;
+  --red: #ef4444;
+  --green: #10b981;
+  --yellow: #f59e0b;
+  --purple: #a78bfa;
+  --cyan-dim: rgba(41, 182, 246, 0.12);
+  --orange-dim: rgba(255, 107, 0, 0.12);
+  --red-dim: rgba(239, 68, 68, 0.13);
+  --green-dim: rgba(16, 185, 129, 0.13);
+  --yellow-dim: rgba(245, 158, 11, 0.13);
+  --purple-dim: rgba(167, 139, 250, 0.15);
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+*:focus, *:focus-visible { outline: none; }
+:focus-visible { outline: none; }
+a { outline: none; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'Inter', -apple-system, sans-serif;
+  font-weight: 400;
+  background: var(--bg-deepest);
+  color: var(--text-primary);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body.lang-fr .en { display: none; }
+body.lang-en .fr { display: none; }
+
+/* LANG TOGGLE */
+.lang-toggle-fixed {
+  position: fixed;
+  top: 24px;
+  right: 24px;
+  z-index: 100;
+  display: flex;
+  gap: 4px;
+  padding: 4px;
+  background: rgba(26, 26, 46, 0.85);
+  backdrop-filter: blur(10px);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+}
+.lang-toggle-fixed button {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  padding: 8px 14px;
+  background: transparent;
+  color: var(--text-tertiary);
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.lang-toggle-fixed button:hover { color: var(--text-primary); }
+.lang-toggle-fixed button.active {
+  background: linear-gradient(135deg, var(--cyan), var(--orange));
+  color: white;
+}
+
+.container {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 48px;
+}
+
+/* HERO */
+.hero {
+  min-height: 92vh;
+  padding: 140px 48px 60px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.hero::before {
+  content: '';
+  position: absolute;
+  top: -200px;
+  right: -100px;
+  width: 500px;
+  height: 500px;
+  background: radial-gradient(circle, var(--cyan-dim), transparent 60%);
+  filter: blur(60px);
+  z-index: -1;
+}
+.hero::after {
+  content: '';
+  position: absolute;
+  bottom: -100px;
+  left: -100px;
+  width: 400px;
+  height: 400px;
+  background: radial-gradient(circle, var(--orange-dim), transparent 60%);
+  filter: blur(60px);
+  z-index: -1;
+}
+
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.15em;
+  color: var(--cyan);
+  background: var(--cyan-dim);
+  padding: 8px 14px;
+  border-radius: 999px;
+  border: 1px solid rgba(41, 182, 246, 0.3);
+  width: fit-content;
+  margin-bottom: 32px;
+}
+.eyebrow .dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--cyan);
+  animation: pulse 2s ease-in-out infinite;
+  box-shadow: 0 0 8px var(--cyan);
+}
+@keyframes pulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.5; transform: scale(1.3); }
+}
+
+.hero h1 {
+  font-size: 68px;
+  font-weight: 800;
+  line-height: 1.05;
+  letter-spacing: -0.03em;
+  margin-bottom: 24px;
+  color: var(--text-primary);
+}
+.hero h1 .accent {
+  background: linear-gradient(135deg, var(--cyan) 0%, var(--orange) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+  border: 0;
+  outline: 0;
+  box-shadow: none;
+}
+.hero h1 .gradient-word {
+  display: inline-block;
+  vertical-align: baseline;
+  height: 1em;
+  width: auto;
+  margin-bottom: -0.22em;
+  margin-left: 0;
+  overflow: visible;
+}
+.hero .subtitle {
+  font-size: 20px;
+  color: var(--text-secondary);
+  max-width: 640px;
+  line-height: 1.5;
+  margin-bottom: 56px;
+}
+
+.hero-stats {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0;
+  padding-top: 32px;
+  border-top: 1px solid var(--border);
+}
+.hero-stat {
+  padding: 20px 24px 20px 0;
+}
+.hero-stat .label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.15em;
+  color: var(--text-tertiary);
+  text-transform: uppercase;
+  margin-bottom: 12px;
+}
+.hero-stat .value {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 38px;
+  font-weight: 700;
+  color: var(--text-primary);
+  line-height: 1;
+}
+.hero-stat .value.cyan { color: var(--cyan); }
+.hero-stat .value.orange { color: var(--orange); }
+.hero-stat .value.red { color: var(--red); }
+.hero-stat .value.green { color: var(--green); }
+
+/* SECTION */
+section.block {
+  padding: 80px 48px;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+section.block.tight { padding: 40px 48px; }
+
+.part-divider {
+  padding: 120px 48px 60px;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+.part-tag {
+  display: inline-block;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.15em;
+  padding: 6px 14px;
+  border-radius: 999px;
+  margin-bottom: 24px;
+}
+.part-tag.internal {
+  color: var(--orange);
+  background: var(--orange-dim);
+  border: 1px solid rgba(255, 107, 0, 0.3);
+}
+.part-divider h2 {
+  font-size: 54px;
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  line-height: 1.05;
+  color: var(--text-primary);
+}
+.part-divider .subtitle {
+  margin-top: 16px;
+  font-size: 18px;
+  color: var(--text-secondary);
+  max-width: 700px;
+}
+
+h3.section-title {
+  font-size: 28px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  margin-bottom: 24px;
+  color: var(--text-primary);
+}
+
+/* CALLOUT */
+.callout {
+  display: flex;
+  gap: 18px;
+  padding: 22px 26px;
+  border-radius: 14px;
+  margin: 20px 0;
+  align-items: flex-start;
+}
+.callout.info {
+  background: var(--cyan-dim);
+  border: 1px solid rgba(41, 182, 246, 0.3);
+}
+.callout.warning {
+  background: var(--yellow-dim);
+  border: 1px solid rgba(245, 158, 11, 0.3);
+}
+.callout.critical {
+  background: var(--red-dim);
+  border: 1px solid rgba(239, 68, 68, 0.3);
+}
+.callout.success {
+  background: var(--green-dim);
+  border: 1px solid rgba(16, 185, 129, 0.3);
+}
+.callout-icon {
+  flex-shrink: 0;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+  font-family: 'JetBrains Mono', monospace;
+  font-weight: 700;
+  font-size: 15px;
+}
+.callout.info .callout-icon { background: rgba(41, 182, 246, 0.2); color: var(--cyan); }
+.callout.warning .callout-icon { background: rgba(245, 158, 11, 0.2); color: var(--yellow); }
+.callout.critical .callout-icon { background: rgba(239, 68, 68, 0.2); color: var(--red); }
+.callout.success .callout-icon { background: rgba(16, 185, 129, 0.2); color: var(--green); }
+.callout-body {
+  flex: 1;
+  color: var(--text-secondary);
+  font-size: 15px;
+  line-height: 1.6;
+}
+.callout-body strong { color: var(--text-primary); }
+.callout-body a {
+  color: var(--cyan);
+  text-decoration: none;
+  border-bottom: 1px dashed rgba(41, 182, 246, 0.4);
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 13px;
+  word-break: break-all;
+}
+.callout-body a:hover { border-bottom-style: solid; }
+
+/* LEGEND */
+.legend {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 12px;
+  margin: 32px 0 48px;
+}
+.legend-item {
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: 10px;
+  padding: 14px 16px;
+}
+.legend-badge {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  margin-right: 8px;
+}
+.legend-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+.legend-count {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 22px;
+  font-weight: 700;
+  margin-top: 8px;
+  color: var(--text-primary);
+}
+.legend-desc {
+  font-size: 12px;
+  color: var(--text-tertiary);
+  margin-top: 4px;
+  line-height: 1.4;
+}
+
+/* PROJECT CARD */
+.project {
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-left: 3px solid var(--cyan);
+  border-radius: 14px;
+  padding: 28px 32px;
+  margin-bottom: 18px;
+  transition: border-color 0.2s;
+}
+.project:hover { border-color: var(--border); }
+
+.project[data-status="actif"] { border-left-color: var(--green); }
+.project[data-status="finaliser"] { border-left-color: var(--cyan); }
+.project[data-status="attente"] { border-left-color: var(--yellow); }
+.project[data-status="bloque"] { border-left-color: var(--red); }
+.project[data-status="fantome"] { border-left-color: var(--text-quaternary); }
+
+.project-head {
+  display: flex;
+  gap: 20px;
+  align-items: flex-start;
+  margin-bottom: 18px;
+}
+
+.project-num {
+  flex-shrink: 0;
+  width: 52px;
+  height: 52px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--text-primary);
+  background: var(--bg-elevated);
+  border-radius: 10px;
+  border: 1px solid var(--border-subtle);
+}
+.project[data-status="actif"] .project-num { color: var(--green); background: var(--green-dim); border-color: rgba(16, 185, 129, 0.25); }
+.project[data-status="finaliser"] .project-num { color: var(--cyan); background: var(--cyan-dim); border-color: rgba(41, 182, 246, 0.25); }
+.project[data-status="attente"] .project-num { color: var(--yellow); background: var(--yellow-dim); border-color: rgba(245, 158, 11, 0.25); }
+.project[data-status="bloque"] .project-num { color: var(--red); background: var(--red-dim); border-color: rgba(239, 68, 68, 0.25); }
+.project[data-status="fantome"] .project-num { color: var(--text-tertiary); }
+
+.project-id { flex: 1; min-width: 0; }
+
+.project-name {
+  font-size: 22px;
+  font-weight: 700;
+  letter-spacing: -0.015em;
+  margin-bottom: 10px;
+  color: var(--text-primary);
+}
+
+.tags-row {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.chip {
+  display: inline-flex;
+  align-items: center;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  padding: 5px 10px;
+  border-radius: 6px;
+  text-transform: uppercase;
+}
+
+.chip.dev-asmae { color: var(--cyan); background: var(--cyan-dim); border: 1px solid rgba(41, 182, 246, 0.25); }
+.chip.dev-badr { color: var(--orange); background: var(--orange-dim); border: 1px solid rgba(255, 107, 0, 0.25); }
+.chip.dev-mahdi { color: var(--purple); background: var(--purple-dim); border: 1px solid rgba(167, 139, 250, 0.25); }
+.chip.dev-hanane { color: var(--green); background: var(--green-dim); border: 1px solid rgba(16, 185, 129, 0.25); }
+.chip.dev-none { color: var(--text-tertiary); background: rgba(100, 116, 139, 0.1); border: 1px solid var(--border); }
+
+.chip.status-actif { color: var(--green); background: var(--green-dim); border: 1px solid rgba(16, 185, 129, 0.3); }
+.chip.status-finaliser { color: var(--cyan); background: var(--cyan-dim); border: 1px solid rgba(41, 182, 246, 0.3); }
+.chip.status-attente { color: var(--yellow); background: var(--yellow-dim); border: 1px solid rgba(245, 158, 11, 0.3); }
+.chip.status-bloque { color: var(--red); background: var(--red-dim); border: 1px solid rgba(239, 68, 68, 0.3); }
+.chip.status-fantome { color: var(--text-tertiary); background: rgba(100, 116, 139, 0.15); border: 1px solid rgba(100, 116, 139, 0.25); }
+
+.chip.price { color: var(--orange); background: var(--orange-dim); border: 1px solid rgba(255, 107, 0, 0.25); }
+
+.project-url {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px;
+  color: var(--cyan);
+  background: rgba(41, 182, 246, 0.06);
+  padding: 10px 14px;
+  border-radius: 8px;
+  margin-bottom: 16px;
+  border-left: 3px solid var(--cyan);
+  word-break: break-all;
+  display: block;
+  text-decoration: none;
+}
+.project-url:hover { background: var(--cyan-dim); }
+.project-url + .project-url { margin-top: -8px; margin-bottom: 16px; }
+
+.project-body {
+  color: var(--text-secondary);
+  font-size: 15px;
+  line-height: 1.65;
+}
+.project-body p { margin-bottom: 10px; }
+.project-body p:last-child { margin-bottom: 0; }
+.project-body strong { color: var(--text-primary); font-weight: 600; }
+.project-body code {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12.5px;
+  color: var(--cyan);
+  background: var(--cyan-dim);
+  padding: 2px 7px;
+  border-radius: 5px;
+}
+
+.project-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  padding-top: 18px;
+  margin-top: 18px;
+  border-top: 1px solid var(--border-subtle);
+  align-items: center;
+}
+.project-actions .action-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  color: var(--text-tertiary);
+  text-transform: uppercase;
+  margin-right: 4px;
+}
+.action-chip {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.03em;
+  padding: 6px 11px;
+  border-radius: 6px;
+  background: var(--bg-elevated);
+  color: var(--text-secondary);
+  border: 1px solid var(--border-subtle);
+}
+
+.domains-list {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  margin: 12px 0;
+}
+.domains-list .domain {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px;
+  color: var(--text-primary);
+  background: var(--bg-elevated);
+  padding: 8px 12px;
+  border-radius: 6px;
+  border-left: 2px solid var(--purple);
+}
+
+/* ENDING */
+.ending {
+  text-align: center;
+  padding: 100px 48px 120px;
+  max-width: 800px;
+  margin: 0 auto;
+}
+.ending .line {
+  width: 40px;
+  height: 2px;
+  background: linear-gradient(90deg, var(--cyan), var(--orange));
+  margin: 0 auto 32px;
+}
+.ending p {
+  font-size: 18px;
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+  .container, section.block, .part-divider, .ending { padding-left: 20px; padding-right: 20px; }
+  .hero { padding: 100px 20px 48px; }
+  .hero h1 { font-size: 32px; }
+  .hero .subtitle { font-size: 16px; margin-bottom: 36px; }
+  .hero-stats { grid-template-columns: repeat(2, 1fr); gap: 4px; }
+  .hero-stat { padding: 16px 12px 16px 0; }
+  .hero-stat .value { font-size: 28px; }
+  .part-divider { padding: 80px 20px 40px; }
+  .part-divider h2 { font-size: 34px; }
+  .legend { grid-template-columns: 1fr 1fr; }
+  .project { padding: 20px 20px; }
+  .project-head { gap: 12px; }
+  .project-num { width: 42px; height: 42px; font-size: 14px; }
+  .project-name { font-size: 18px; }
+  .domains-list { grid-template-columns: 1fr; }
+  .lang-toggle-fixed {
+    top: 12px; right: 12px;
+    background: rgba(26, 26, 46, 0.6);
+    backdrop-filter: blur(8px);
+  }
+  .lang-toggle-fixed button { padding: 6px 10px; font-size: 10px; }
+}
+
+@media print {
+  .lang-toggle-fixed { display: none !important; }
+  body { background: #07091a !important; }
+}
+</style>
+</head>
+<body class="lang-fr">
+
+<div class="lang-toggle-fixed">
+  <button data-lang="fr" class="active">FR</button>
+  <button data-lang="en">EN</button>
+</div>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="eyebrow">
+    <span class="dot"></span>
+    <span class="fr">HANDOFF • INTERNE</span>
+    <span class="en">HANDOFF • INTERNAL</span>
+  </div>
+
+  <h1>
+    <span class="fr">Les projets en <svg class="gradient-word" viewBox="0 0 240 70" xmlns="http://www.w3.org/2000/svg" aria-label="cours" preserveAspectRatio="xMinYMax meet"><defs><linearGradient id="g1" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#29B6F6"/><stop offset="100%" stop-color="#FF6B00"/></linearGradient></defs><text x="0" y="58" font-family="Inter, sans-serif" font-size="72" font-weight="800" fill="url(#g1)" letter-spacing="-2.04">cours</text></svg></span><span class="en">Current <svg class="gradient-word" viewBox="0 0 345 70" xmlns="http://www.w3.org/2000/svg" aria-label="projects" preserveAspectRatio="xMinYMax meet"><defs><linearGradient id="g2" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#29B6F6"/><stop offset="100%" stop-color="#FF6B00"/></linearGradient></defs><text x="0" y="58" font-family="Inter, sans-serif" font-size="72" font-weight="800" fill="url(#g2)" letter-spacing="-2.04">projects</text></svg></span>
+  </h1>
+
+  <p class="subtitle">
+    <span class="fr">Pour la personne qui prend la suite. Ce qui bloque chaque projet et ce qu'il reste à faire pour les finir.</span>
+    <span class="en">For whoever takes over next. What's blocking each project and what's left to finish them off.</span>
+  </p>
+
+  <div class="hero-stats">
+    <div class="hero-stat">
+      <div class="label"><span class="fr">Projets total</span><span class="en">Total projects</span></div>
+      <div class="value">29</div>
+    </div>
+    <div class="hero-stat">
+      <div class="label"><span class="fr">Actifs</span><span class="en">Active</span></div>
+      <div class="value green">5</div>
+    </div>
+    <div class="hero-stat">
+      <div class="label"><span class="fr">En attente</span><span class="en">Waiting</span></div>
+      <div class="value orange">12</div>
+    </div>
+    <div class="hero-stat">
+      <div class="label"><span class="fr">Fantômes</span><span class="en">Ghosts</span></div>
+      <div class="value red">10</div>
+    </div>
+  </div>
+</section>
+
+<!-- WHERE TRACKED -->
+<section class="block">
+  <h3 class="section-title">
+    <span class="fr">Où je track tout</span>
+    <span class="en">Where I track everything</span>
+  </h3>
+
+  <div class="callout info">
+    <div class="callout-icon">i</div>
+    <div class="callout-body">
+      <p class="fr"><strong>La Google Sheet est la source de vérité.</strong> Via WhatsApp c'est quasi impossible à gérer, donc tout passe par là.</p>
+      <p class="en"><strong>The Google Sheet is the source of truth.</strong> Via WhatsApp it's almost impossible to manage, so everything goes through there.</p>
+      <p style="margin-top: 10px;">
+        <a href="https://docs.google.com/spreadsheets/d/1BhfZsHLH4NHjqKPIOwJVjX9eeH4uYo9ow5cyRc4YF80/edit?gid=1985562733#gid=1985562733" target="_blank">docs.google.com/spreadsheets/d/1BhfZsHLH4NHjqKPIOwJVjX9eeH4uYo9ow5cyRc4YF80</a>
+      </p>
+    </div>
+  </div>
+
+  <div class="callout warning">
+    <div class="callout-icon">!</div>
+    <div class="callout-body">
+      <p class="fr">Il y a sûrement un moyen plus moderne de faire que via une sheet, mais elle est connectée aux sheets de l'équipe sales donc ça auto-update. <strong>Je te laisse voir avec Joseph pour changer le système.</strong></p>
+      <p class="en">There's probably a more modern way to do this than a sheet, but it's connected to the sales team sheets so it auto-updates. <strong>I'll let you talk with Joseph to change the setup.</strong></p>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS SECTION HEADER -->
+<section class="block" style="padding-bottom: 20px;">
+  <h3 class="section-title">
+    <span class="fr">Les 29 projets</span>
+    <span class="en">The 29 projects</span>
+  </h3>
+</section>
+
+<!-- LEGEND -->
+<section class="block tight">
+  <div class="legend">
+    <div class="legend-item">
+      <div><span class="legend-badge" style="background: var(--green)"></span><span class="legend-label" style="color: var(--green)">ACTIF</span></div>
+      <div class="legend-count">5</div>
+      <div class="legend-desc fr">Dev bosse dessus</div>
+      <div class="legend-desc en">Dev working on it</div>
+    </div>
+    <div class="legend-item">
+      <div><span class="legend-badge" style="background: var(--cyan)"></span><span class="legend-label" style="color: var(--cyan)">À FINALISER</span></div>
+      <div class="legend-count">2</div>
+      <div class="legend-desc fr">99% fini, petite action</div>
+      <div class="legend-desc en">99% done, small action</div>
+    </div>
+    <div class="legend-item">
+      <div><span class="legend-badge" style="background: var(--yellow)"></span><span class="legend-label" style="color: var(--yellow)">EN ATTENTE</span></div>
+      <div class="legend-count">10</div>
+      <div class="legend-desc fr">Balle dans le camp client</div>
+      <div class="legend-desc en">Ball in client's court</div>
+    </div>
+    <div class="legend-item">
+      <div><span class="legend-badge" style="background: var(--red)"></span><span class="legend-label" style="color: var(--red)">BLOQUÉ</span></div>
+      <div class="legend-count">2</div>
+      <div class="legend-desc fr">Blocage bizarre</div>
+      <div class="legend-desc en">Weird block</div>
+    </div>
+    <div class="legend-item">
+      <div><span class="legend-badge" style="background: var(--text-quaternary)"></span><span class="legend-label" style="color: var(--text-tertiary)">FANTÔME</span></div>
+      <div class="legend-count">10</div>
+      <div class="legend-desc fr">Client disparu</div>
+      <div class="legend-desc en">Client gone</div>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section class="block" style="padding-top: 20px;">
+
+  <!-- 01 AYLIM -->
+  <div class="project" data-status="actif">
+    <div class="project-head">
+      <div class="project-num">01</div>
+      <div class="project-id">
+        <div class="project-name">Aylim / BHM</div>
+        <div class="tags-row">
+          <span class="chip dev-asmae">DEV • ASMAE</span>
+          <span class="chip status-actif"><span class="fr">ACTIF</span><span class="en">ACTIVE</span></span>
+        </div>
+      </div>
+    </div>
+    <a class="project-url" href="https://aylim.ma/" target="_blank">aylim.ma</a>
+    <div class="project-body">
+      <p class="fr">Le client veut moderniser le design, c'est tout. Il veut <strong>exactement ce qu'il y a sur son ancien site mais modernisé</strong>, et un site plus rapide. J'ai eu un call avec lui, il a pas voulu remplir le form.</p>
+      <p class="en">Client wants to modernize the design, that's it. He wants <strong>exactly what's on his old site but modernized</strong>, and a faster site. I had a call with him, he didn't want to fill the form.</p>
+    </div>
+    <div class="project-actions">
+      <span class="action-label"><span class="fr">À FAIRE</span><span class="en">TO DO</span></span>
+      <span class="action-chip"><span class="fr">Moderniser design</span><span class="en">Modernize design</span></span>
+      <span class="action-chip"><span class="fr">Optimiser vitesse</span><span class="en">Speed optimization</span></span>
+      <span class="action-chip">WhatsApp: aylim / BHM</span>
+    </div>
+  </div>
+
+  <!-- 02 FANTINOLUX -->
+  <div class="project" data-status="actif">
+    <div class="project-head">
+      <div class="project-num">02</div>
+      <div class="project-id">
+        <div class="project-name">Fantinolux X Big House</div>
+        <div class="tags-row">
+          <span class="chip dev-badr">DEV • BADR</span>
+          <span class="chip status-actif"><span class="fr">ACTIF</span><span class="en">ACTIVE</span></span>
+        </div>
+      </div>
+    </div>
+    <div class="project-body">
+      <p class="fr">Badr bosse sur les changements pour le site. <strong>Je recommande vraiment de migrer l'hébergement vers Kinsta au lieu de Hostinger</strong> - c'est un gros client, on va à 100% avoir des problèmes si on garde sur Hostinger.</p>
+      <p class="en">Badr is working on the website changes. <strong>I strongly recommend moving the hosting to Kinsta instead of Hostinger</strong> - it's a big client, we'll 100% have issues if we stay on Hostinger.</p>
+    </div>
+    <div class="project-actions">
+      <span class="action-label"><span class="fr">À FAIRE</span><span class="en">TO DO</span></span>
+      <span class="action-chip"><span class="fr">Finir changements</span><span class="en">Finish changes</span></span>
+      <span class="action-chip"><span class="fr">Migrer Hostinger → Kinsta</span><span class="en">Migrate Hostinger → Kinsta</span></span>
+    </div>
+  </div>
+
+  <!-- 03 EMMANUEL LUNARDI -->
+  <div class="project" data-status="finaliser">
+    <div class="project-head">
+      <div class="project-num">03</div>
+      <div class="project-id">
+        <div class="project-name">Emmanuel Lunardi X Big House Marketing</div>
+        <div class="tags-row">
+          <span class="chip dev-none"><span class="fr">DEV • AUCUN</span><span class="en">DEV • NONE</span></span>
+          <span class="chip status-finaliser"><span class="fr">À FINALISER</span><span class="en">TO CLOSE</span></span>
+        </div>
+      </div>
+    </div>
+    <div class="project-body">
+      <p class="fr">Ce projet est fini depuis des plombes mais <strong>elle fait chier et est très pénible honnêtement</strong>. Elle veut un call pour migrer ses deux sites vers son propre hosting.</p>
+      <p class="en">This project has been done for ages but <strong>she's a pain and very annoying honestly</strong>. She wants a call to migrate both her websites to her own hosting.</p>
+      <p class="fr">Aussi les noms de domaine, mais ils sont connectés à l'email gratuit qu'on a créé pour nous sur Hostinger, et ce plan est pourri. Je lui ai dit de faire un Google Workspace pour qu'elle arrête de revenir vers nous - c'est ce que tu devrais faire toi aussi.</p>
+      <p class="en">Also the domain names, but they're connected to the free email we created for us on Hostinger and that plan sucks. I told her to get a Google Workspace so she stops coming back to us - that's what you should do too.</p>
+      <div class="domains-list">
+        <div class="domain">lamaisonduremere.fr</div>
+        <div class="domain">lamaisonduremere.com</div>
+        <div class="domain">sauvermonimmo.com</div>
+        <div class="domain">sauvermonimmo.fr</div>
+      </div>
+    </div>
+    <div class="project-actions">
+      <span class="action-label"><span class="fr">À FAIRE</span><span class="en">TO DO</span></span>
+      <span class="action-chip"><span class="fr">Call migration</span><span class="en">Migration call</span></span>
+      <span class="action-chip"><span class="fr">Migrer 4 domaines</span><span class="en">Migrate 4 domains</span></span>
+      <span class="action-chip"><span class="fr">Pousser Google Workspace</span><span class="en">Push Google Workspace</span></span>
+    </div>
+  </div>
+
+  <!-- 04 GHIZLAN -->
+  <div class="project" data-status="actif">
+    <div class="project-head">
+      <div class="project-num">04</div>
+      <div class="project-id">
+        <div class="project-name">Ghizlan centre américain X BHM</div>
+        <div class="tags-row">
+          <span class="chip dev-asmae">DEV • ASMAE</span>
+          <span class="chip status-actif"><span class="fr">ACTIF</span><span class="en">ACTIVE</span></span>
+        </div>
+      </div>
+    </div>
+    <div class="project-body">
+      <p class="fr">Site web, mais ils veulent un meet avec le dev pour faire les dernières modifications.</p>
+      <p class="en">Website, but they want a meet with the dev to do some last changes.</p>
+    </div>
+    <div class="project-actions">
+      <span class="action-label"><span class="fr">À FAIRE</span><span class="en">TO DO</span></span>
+      <span class="action-chip"><span class="fr">Meet dev + client</span><span class="en">Dev + client meet</span></span>
+      <span class="action-chip"><span class="fr">Dernières modifs</span><span class="en">Final changes</span></span>
+    </div>
+  </div>
+
+  <!-- 05 SILTI -->
+  <div class="project" data-status="actif">
+    <div class="project-head">
+      <div class="project-num">05</div>
+      <div class="project-id">
+        <div class="project-name">Silti X Big House Marketing</div>
+        <div class="tags-row">
+          <span class="chip dev-mahdi">DEV • MAHDI</span>
+          <span class="chip status-actif"><span class="fr">ACTIF</span><span class="en">ACTIVE</span></span>
+        </div>
+      </div>
+    </div>
+    <div class="project-body">
+      <p class="fr">Mahdi est au courant vu que c'est lui qui l'a fait, mais <strong>elle n'est jamais satisfaite</strong>. Elle a payé très peu et veut un site next level. <strong>Faut faire un call avec elle pour lui calmer le rythme.</strong></p>
+      <p class="en">Mahdi knows about this since he did it, but <strong>she's never satisfied</strong>. She paid very little and wants a next-level website. <strong>Need to do a call with her to limit her speed.</strong></p>
+    </div>
+    <div class="project-actions">
+      <span class="action-label"><span class="fr">À FAIRE</span><span class="en">TO DO</span></span>
+      <span class="action-chip"><span class="fr">Call pour cadrer</span><span class="en">Framing call</span></span>
+      <span class="action-chip"><span class="fr">Limiter sa vitesse</span><span class="en">Limit her pace</span></span>
+    </div>
+  </div>
+
+  <!-- 06 ANGE & COCO -->
+  <div class="project" data-status="attente">
+    <div class="project-head">
+      <div class="project-num">06</div>
+      <div class="project-id">
+        <div class="project-name">Ange & Coco maternité X Big House</div>
+        <div class="tags-row">
+          <span class="chip dev-asmae">DEV • ASMAE</span>
+          <span class="chip status-attente"><span class="fr">EN ATTENTE CLIENT</span><span class="en">WAITING CLIENT</span></span>
+        </div>
+      </div>
+    </div>
+    <div class="project-body">
+      <p class="fr">Elle était sur une grosse pause parce qu'elle cherchait un fournisseur pour les vêtements etc. <strong>J'attends qu'elle me file la liste des vêtements qu'elle va vendre avec description, etc.</strong></p>
+      <p class="en">She was on a big pause because she was looking for a supplier for the clothes etc. <strong>I'm waiting for her to provide the list of clothes she'll sell with descriptions etc.</strong></p>
+    </div>
+    <div class="project-actions">
+      <span class="action-label"><span class="fr">À FAIRE</span><span class="en">TO DO</span></span>
+      <span class="action-chip"><span class="fr">Attendre liste produits</span><span class="en">Wait for product list</span></span>
+      <span class="action-chip"><span class="fr">Intégrer descriptions</span><span class="en">Integrate descriptions</span></span>
+    </div>
+  </div>
+
+  <!-- 07 OUSMAN -->
+  <div class="project" data-status="finaliser">
+    <div class="project-head">
+      <div class="project-num">07</div>
+      <div class="project-id">
+        <div class="project-name">Ousman X Big House Marketing</div>
+        <div class="tags-row">
+          <span class="chip dev-asmae">DEV • ASMAE</span>
+          <span class="chip status-finaliser"><span class="fr">À FINALISER</span><span class="en">TO CLOSE</span></span>
+        </div>
+      </div>
+    </div>
+    <a class="project-url" href="https://papayawhip-camel-993941.hostingersite.com/" target="_blank">papayawhip-camel-993941.hostingersite.com</a>
+    <div class="project-body">
+      <p class="fr">Il a mis en pause son site sécurité pour travailler sur la boîte de bouteilles d'eau. Le site est fini, on a fait les changements qu'il voulait, <strong>faut juste se mettre d'accord avec lui sur le nom de domaine et le connecter, c'est tout.</strong></p>
+      <p class="en">He paused his security website to work on his water bottle company. The website is finished, we did the changes he wanted, <strong>just need to agree with him on the domain name and connect it, mostly.</strong></p>
+      <p class="fr">Même groupe - on fait aussi le packaging pour ses bouteilles d'eau. <strong>Faut valider avec Romy pour les petits détails qu'on a.</strong></p>
+      <p class="en">Same group - we're also making packaging for his water bottles. <strong>Need to validate with Romy for the little details we have.</strong></p>
+    </div>
+    <div class="project-actions">
+      <span class="action-label"><span class="fr">À FAIRE</span><span class="en">TO DO</span></span>
+      <span class="action-chip"><span class="fr">Valider nom de domaine</span><span class="en">Agree on domain</span></span>
+      <span class="action-chip"><span class="fr">Connecter domaine</span><span class="en">Connect domain</span></span>
+      <span class="action-chip"><span class="fr">Voir Romy pour packaging</span><span class="en">See Romy for packaging</span></span>
+    </div>
+  </div>
+
+  <!-- 08 AUTO CONDUITE -->
+  <div class="project" data-status="attente">
+    <div class="project-head">
+      <div class="project-num">08</div>
+      <div class="project-id">
+        <div class="project-name">Auto Conduite X Big House Marketing</div>
+        <div class="tags-row">
+          <span class="chip dev-badr">DEV • BADR</span>
+          <span class="chip status-attente"><span class="fr">BLOQUÉ INTERNE</span><span class="en">INTERNAL BLOCK</span></span>
+        </div>
+      </div>
+    </div>
+    <div class="project-body">
+      <p class="fr">On a fait son projet comme il voulait, on a fait tout ce qu'il a demandé, mais <strong>à la fin ses clients n'étaient pas satisfaits</strong>. On voulait pas décevoir le client donc j'ai accepté de faire les changements, mais <strong>c'est en pending depuis parce que les devs sont occupés</strong>.</p>
+      <p class="en">We did his project as he wanted, we did everything he asked, but <strong>at the end his customers weren't satisfied</strong>. We didn't want to disappoint the client so I agreed to do the changes, but <strong>it's been pending since because the devs are busy</strong>.</p>
+      <p class="fr">Les docs et photos sont dans le groupe. Je lui ai dit que c'est pas possible de refaire tout le site. <strong>Demande à quelqu'un de l'équipe de te retransférer tout.</strong></p>
+      <p class="en">The docs and photos are in the group. I told him it's not possible to redo the whole website. <strong>Ask someone from the team to retransfer you everything.</strong></p>
+    </div>
+    <div class="project-actions">
+      <span class="action-label"><span class="fr">À FAIRE</span><span class="en">TO DO</span></span>
+      <span class="action-chip"><span class="fr">Prévoir temps dev</span><span class="en">Allocate dev time</span></span>
+      <span class="action-chip"><span class="fr">Retransférer docs/photos</span><span class="en">Retransfer docs/photos</span></span>
+    </div>
+  </div>
+
+  <!-- 09 MONOLYTH -->
+  <div class="project" data-status="attente">
+    <div class="project-head">
+      <div class="project-num">09</div>
+      <div class="project-id">
+        <div class="project-name">Monolyth X Big House Marketing</div>
+        <div class="tags-row">
+          <span class="chip dev-asmae">DEV • ASMAE</span>
+          <span class="chip dev-badr">DEV • BADR</span>
+          <span class="chip status-attente"><span class="fr">EN ATTENTE CLIENT</span><span class="en">WAITING CLIENT</span></span>
+        </div>
+      </div>
+    </div>
+    <a class="project-url" href="https://aquamarine-raven-391-664646.hostingersite.com/" target="_blank">aquamarine-raven-391-664646.hostingersite.com</a>
+    <div class="project-body">
+      <p class="fr">On a fait tous les changements, il continue à en demander, mais <strong>il disparaît</strong>. <strong>Faut juste connecter le nom de domaine.</strong></p>
+      <p class="en">We did all the changes he keeps asking for, but <strong>he keeps disappearing</strong>. <strong>We just need to connect the domain name.</strong></p>
+    </div>
+    <div class="project-actions">
+      <span class="action-label"><span class="fr">À FAIRE</span><span class="en">TO DO</span></span>
+      <span class="action-chip"><span class="fr">Relancer client</span><span class="en">Follow up client</span></span>
+      <span class="action-chip"><span class="fr">Connecter domaine</span><span class="en">Connect domain</span></span>
+    </div>
+  </div>
+
+  <!-- 10 CHILL SPA -->
+  <div class="project" data-status="attente">
+    <div class="project-head">
+      <div class="project-num">10</div>
+      <div class="project-id">
+        <div class="project-name">Chill Spa X Big House Marketing</div>
+        <div class="tags-row">
+          <span class="chip dev-badr">DEV • BADR</span>
+          <span class="chip dev-mahdi">DEV • MAHDI</span>
+          <span class="chip status-attente"><span class="fr">EN ATTENTE CLIENT</span><span class="en">WAITING CLIENT</span></span>
+        </div>
+      </div>
+    </div>
+    <a class="project-url" href="https://pink-flamingo-344226.hostingersite.com/" target="_blank">pink-flamingo-344226.hostingersite.com</a>
+    <div class="project-body">
+      <p class="fr">J'ai eu un call avec elle, elle a un funnel, on a fait tout ce qu'elle voulait mais <strong>elle disparaît aussi et revient des mois plus tard</strong>. On attend les dernières touches et on crée un <strong>sous-domaine depuis son domaine principal</strong> <code>Tricopigmentation-paris.fr</code>.</p>
+      <p class="en">I had a call with her, she has a funnel, we did everything she wants but <strong>she disappears too and comes back months later</strong>. Waiting on last touches and we create a <strong>subdomain from her main domain</strong> <code>Tricopigmentation-paris.fr</code>.</p>
+    </div>
+    <div class="project-actions">
+      <span class="action-label"><span class="fr">À FAIRE</span><span class="en">TO DO</span></span>
+      <span class="action-chip"><span class="fr">Dernières touches</span><span class="en">Last touches</span></span>
+      <span class="action-chip"><span class="fr">Créer sous-domaine</span><span class="en">Create subdomain</span></span>
+    </div>
+  </div>
+
+  <!-- 11 EXQUIS SERVICES -->
+  <div class="project" data-status="fantome">
+    <div class="project-head">
+      <div class="project-num">11</div>
+      <div class="project-id">
+        <div class="project-name">EXQUIS SERVICES X Big House Marketing</div>
+        <div class="tags-row">
+          <span class="chip dev-none"><span class="fr">DEV • AUCUN</span><span class="en">DEV • NONE</span></span>
+          <span class="chip status-fantome"><span class="fr">FANTÔME</span><span class="en">GHOST</span></span>
+        </div>
+      </div>
+    </div>
+    <a class="project-url" href="https://lightgrey-jackal-361120.hostingersite.com/" target="_blank">lightgrey-jackal-361120.hostingersite.com</a>
+    <div class="project-body">
+      <p class="fr">On a fini son site et <strong>il a juste disparu</strong>. Le domaine n'est pas connecté, il a arrêté de répondre.</p>
+      <p class="en">We finished his website and <strong>he just disappeared</strong>. Domain isn't connected, he stopped answering.</p>
+    </div>
+    <div class="project-actions">
+      <span class="action-label"><span class="fr">À FAIRE</span><span class="en">TO DO</span></span>
+      <span class="action-chip"><span class="fr">Relancer</span><span class="en">Follow up</span></span>
+      <span class="action-chip"><span class="fr">Connecter domaine si retour</span><span class="en">Connect domain if back</span></span>
+    </div>
+  </div>
+
+  <!-- 12 MUSK & COUTURE -->
+  <div class="project" data-status="actif">
+    <div class="project-head">
+      <div class="project-num">12</div>
+      <div class="project-id">
+        <div class="project-name">Musk & Couture X BHM <span style="color: var(--text-tertiary); font-size: 14px; font-weight: 500;">(nouveau)</span></div>
+        <div class="tags-row">
+          <span class="chip dev-hanane">CLOSED BY HANANE</span>
+          <span class="chip status-actif"><span class="fr">ACTIF</span><span class="en">ACTIVE</span></span>
+        </div>
+      </div>
+    </div>
+    <a class="project-url" href="http://muskcouture.com" target="_blank">muskcouture.com</a>
+    <div class="project-body">
+      <p class="fr">Closé par Hanane, on a acheté le domaine et elle a rempli le brief, mais <strong>on attend les dernières infos pour démarrer</strong>. <strong>Contact Hanane.</strong></p>
+      <p class="en">Closed by Hanane, we bought the domain and she filled the brief, but <strong>we're waiting on last few infos to get started</strong>. <strong>Contact Hanane.</strong></p>
+    </div>
+    <div class="project-actions">
+      <span class="action-label"><span class="fr">À FAIRE</span><span class="en">TO DO</span></span>
+      <span class="action-chip"><span class="fr">Contacter Hanane</span><span class="en">Contact Hanane</span></span>
+      <span class="action-chip"><span class="fr">Attendre dernières infos</span><span class="en">Wait for last infos</span></span>
+      <span class="action-chip"><span class="fr">Démarrer dev</span><span class="en">Start dev</span></span>
+    </div>
+  </div>
+
+  <!-- 13 ZESS FASHION -->
+  <div class="project" data-status="fantome">
+    <div class="project-head">
+      <div class="project-num">13</div>
+      <div class="project-id">
+        <div class="project-name">Zess Fashion - Mme Halimatou <span style="color: var(--text-tertiary); font-size: 14px; font-weight: 500;">(site/logo Ecom)</span></div>
+        <div class="tags-row">
+          <span class="chip dev-none"><span class="fr">DEV • AUCUN</span><span class="en">DEV • NONE</span></span>
+          <span class="chip status-fantome"><span class="fr">FANTÔME</span><span class="en">GHOST</span></span>
+        </div>
+      </div>
+    </div>
+    <div class="project-body">
+      <p class="fr">A complètement disparu. On attendait qu'elle nous file les infos sur les produits qu'elle allait vendre etc, mais <strong>aucune info du tout</strong>.</p>
+      <p class="en">Completely vanished. We were waiting for her to provide info about the products she'd sell etc, but <strong>no info at all</strong>.</p>
+    </div>
+    <div class="project-actions">
+      <span class="action-label"><span class="fr">À FAIRE</span><span class="en">TO DO</span></span>
+      <span class="action-chip"><span class="fr">Attendre si elle revient</span><span class="en">Wait if she returns</span></span>
+    </div>
+  </div>
+
+  <!-- 14 DOUNIA LAAL -->
+  <div class="project" data-status="attente">
+    <div class="project-head">
+      <div class="project-num">14</div>
+      <div class="project-id">
+        <div class="project-name">Dounia LAAL X Big House Marketing</div>
+        <div class="tags-row">
+          <span class="chip dev-badr">DEV • BADR</span>
+          <span class="chip status-attente"><span class="fr">EN ATTENTE CLIENT</span><span class="en">WAITING CLIENT</span></span>
+        </div>
+      </div>
+    </div>
+    <a class="project-url" href="https://wheat-ram-554107.hostingersite.com/" target="_blank">wheat-ram-554107.hostingersite.com</a>
+    <div class="project-body">
+      <p class="fr">On a fini son site, c'est validé, mais elle veut le transférer sur son propre hosting. <strong>Elle était enceinte donc elle a disparu aussi.</strong></p>
+      <p class="en">We finished her site, it's validated, but she wants to transfer it to her own hosting. <strong>She was pregnant so she disappeared too.</strong></p>
+    </div>
+    <div class="project-actions">
+      <span class="action-label"><span class="fr">À FAIRE</span><span class="en">TO DO</span></span>
+      <span class="action-chip"><span class="fr">Attendre son retour</span><span class="en">Wait for her return</span></span>
+      <span class="action-chip"><span class="fr">Migrer hosting</span><span class="en">Migrate hosting</span></span>
+    </div>
+  </div>
+
+  <!-- 15 GREEN SOLUTIONS -->
+  <div class="project" data-status="fantome">
+    <div class="project-head">
+      <div class="project-num">15</div>
+      <div class="project-id">
+        <div class="project-name">Green Solutions X Big House Marketing</div>
+        <div class="tags-row">
+          <span class="chip dev-none"><span class="fr">DEV • AUCUN</span><span class="en">DEV • NONE</span></span>
+          <span class="chip status-fantome"><span class="fr">FANTÔME</span><span class="en">GHOST</span></span>
+        </div>
+      </div>
+    </div>
+    <div class="project-body">
+      <p class="fr"><strong>On n'a jamais démarré.</strong> Il a dit qu'il voyageait en Égypte et il a disparu.</p>
+      <p class="en"><strong>We never started.</strong> He said he was travelling to Egypt and disappeared.</p>
+    </div>
+    <div class="project-actions">
+      <span class="action-label"><span class="fr">À FAIRE</span><span class="en">TO DO</span></span>
+      <span class="action-chip"><span class="fr">Aucune action</span><span class="en">No action</span></span>
+    </div>
+  </div>
+
+  <!-- 16 ETHNIC COSMETHIC -->
+  <div class="project" data-status="fantome">
+    <div class="project-head">
+      <div class="project-num">16</div>
+      <div class="project-id">
+        <div class="project-name">Ethnic Cosmethic - Étile Didier <span style="color: var(--text-tertiary); font-size: 14px; font-weight: 500;">(site vitrine)</span></div>
+        <div class="tags-row">
+          <span class="chip dev-none"><span class="fr">DEV • AUCUN</span><span class="en">DEV • NONE</span></span>
+          <span class="chip status-fantome"><span class="fr">FANTÔME</span><span class="en">GHOST</span></span>
+        </div>
+      </div>
+    </div>
+    <a class="project-url" href="https://ghostwhite-mantis-670892.hostingersite.com/" target="_blank">ghostwhite-mantis-670892.hostingersite.com</a>
+    <div class="project-body">
+      <p class="fr">On a fait le site, ils ont dit qu'ils allaient nous donner des changements et <strong>ils ont disparu</strong>.</p>
+      <p class="en">We did the site, they said they'd give us some changes and <strong>disappeared</strong>.</p>
+    </div>
+    <div class="project-actions">
+      <span class="action-label"><span class="fr">À FAIRE</span><span class="en">TO DO</span></span>
+      <span class="action-chip"><span class="fr">Attendre liste changes</span><span class="en">Wait for changes list</span></span>
+    </div>
+  </div>
+
+  <!-- 17 DORIANE -->
+  <div class="project" data-status="fantome">
+    <div class="project-head">
+      <div class="project-num">17</div>
+      <div class="project-id">
+        <div class="project-name">Doriane X Big House Marketing</div>
+        <div class="tags-row">
+          <span class="chip dev-none"><span class="fr">DEV • AUCUN</span><span class="en">DEV • NONE</span></span>
+          <span class="chip status-fantome"><span class="fr">FANTÔME</span><span class="en">GHOST</span></span>
+        </div>
+      </div>
+    </div>
+    <a class="project-url" href="https://snow-magpie-335064.hostingersite.com/" target="_blank">snow-magpie-335064.hostingersite.com</a>
+    <div class="project-body">
+      <p class="fr">On a fait son funnel, <strong>elle a adoré mais elle a disparu</strong>. On a encore besoin de quelques infos et de quelques éléments d'elle pour finaliser.</p>
+      <p class="en">We did her funnel, <strong>she loved it but she disappeared</strong>. We still need some infos and a couple of elements from her to finalize.</p>
+    </div>
+    <div class="project-actions">
+      <span class="action-label"><span class="fr">À FAIRE</span><span class="en">TO DO</span></span>
+      <span class="action-chip"><span class="fr">Récupérer derniers éléments</span><span class="en">Get last elements</span></span>
+      <span class="action-chip"><span class="fr">Finaliser funnel</span><span class="en">Finalize funnel</span></span>
+    </div>
+  </div>
+
+  <!-- 18 ANITTA -->
+  <div class="project" data-status="fantome">
+    <div class="project-head">
+      <div class="project-num">18</div>
+      <div class="project-id">
+        <div class="project-name">ANITTA X BIG HOUSE</div>
+        <div class="tags-row">
+          <span class="chip dev-none"><span class="fr">DEV • AUCUN</span><span class="en">DEV • NONE</span></span>
+          <span class="chip price">SIT 139€</span>
+          <span class="chip status-fantome"><span class="fr">FANTÔME</span><span class="en">GHOST</span></span>
+        </div>
+      </div>
+    </div>
+    <a class="project-url" href="https://lien.bighousemarketing.lu/details-des-produits" target="_blank">lien.bighousemarketing.lu/details-des-produits</a>
+    <div class="project-body">
+      <p class="fr">On a fait son site mais <strong>elle a disparu</strong>. On a encore besoin de la liste des plats avec noms et prix. Elle a envoyé des photos dans le groupe et <strong>elle s'attendait à ce qu'on devine ce que c'est, lol</strong>.</p>
+      <p class="en">We did her website but <strong>she disappeared</strong>. We still need the list of plates names and prices. She sent photos in the group and <strong>expected us to know what they are, lol</strong>.</p>
+    </div>
+    <div class="project-actions">
+      <span class="action-label"><span class="fr">À FAIRE</span><span class="en">TO DO</span></span>
+      <span class="action-chip"><span class="fr">Obtenir liste plats + prix</span><span class="en">Get plates list + prices</span></span>
+    </div>
+  </div>
+
+  <!-- 19 QUAMTYS -->
+  <div class="project" data-status="bloque">
+    <div class="project-head">
+      <div class="project-num">19</div>
+      <div class="project-id">
+        <div class="project-name">Quamtys sàrl X Big House</div>
+        <div class="tags-row">
+          <span class="chip dev-none"><span class="fr">DEV • AUCUN</span><span class="en">DEV • NONE</span></span>
+          <span class="chip status-bloque"><span class="fr">BLOQUÉ</span><span class="en">BLOCKED</span></span>
+        </div>
+      </div>
+    </div>
+    <a class="project-url" href="https://lawngreen-gazelle-759853.hostingersite.com/" target="_blank">lawngreen-gazelle-759853.hostingersite.com</a>
+    <div class="project-body">
+      <p class="fr">On a fait le site mais <strong>il veut des changements sans nous dire lesquels, lol</strong>.</p>
+      <p class="en">We did the website but <strong>he wants changes but refuses to tell us what changes, lol</strong>.</p>
+    </div>
+    <div class="project-actions">
+      <span class="action-label"><span class="fr">À FAIRE</span><span class="en">TO DO</span></span>
+      <span class="action-chip"><span class="fr">Obtenir liste précise</span><span class="en">Get precise list</span></span>
+    </div>
+  </div>
+
+  <!-- 20 ANNIE CM -->
+  <div class="project" data-status="fantome">
+    <div class="project-head">
+      <div class="project-num">20</div>
+      <div class="project-id">
+        <div class="project-name">Annie CM + Sit internet</div>
+        <div class="tags-row">
+          <span class="chip dev-none"><span class="fr">DEV • AUCUN</span><span class="en">DEV • NONE</span></span>
+          <span class="chip price">139€</span>
+          <span class="chip status-fantome"><span class="fr">FANTÔME</span><span class="en">GHOST</span></span>
+        </div>
+      </div>
+    </div>
+    <div class="project-body">
+      <p class="fr">On a fini son projet mais <strong>il voulait pas prendre l'abonnement Shopify et il a disparu</strong>. Le site est dans Shopify Partner, tié à l'email de contact.</p>
+      <p class="en">We finished his project but <strong>he didn't want to buy the Shopify subscription and disappeared</strong>. Site is in Shopify Partner, tied to the contact email.</p>
+    </div>
+    <div class="project-actions">
+      <span class="action-label"><span class="fr">À FAIRE</span><span class="en">TO DO</span></span>
+      <span class="action-chip"><span class="fr">Attendre si retour</span><span class="en">Wait if returns</span></span>
+      <span class="action-chip"><span class="fr">Shopify Partner account</span><span class="en">Shopify Partner account</span></span>
+    </div>
+  </div>
+
+  <!-- 21 HANANE -->
+  <div class="project" data-status="fantome">
+    <div class="project-head">
+      <div class="project-num">21</div>
+      <div class="project-id">
+        <div class="project-name">Hanane X Big House Marketing</div>
+        <div class="tags-row">
+          <span class="chip dev-none"><span class="fr">DEV • AUCUN</span><span class="en">DEV • NONE</span></span>
+          <span class="chip status-fantome"><span class="fr">FANTÔME</span><span class="en">GHOST</span></span>
+        </div>
+      </div>
+    </div>
+    <a class="project-url" href="https://lightgoldenrodyellow-herring-810149.hostingersite.com/" target="_blank">lightgoldenrodyellow-herring-810149.hostingersite.com</a>
+    <div class="project-body">
+      <p class="fr">On a fait son site et <strong>elle a disparu</strong>.</p>
+      <p class="en">We did her website and <strong>she disappeared</strong>.</p>
+    </div>
+    <div class="project-actions">
+      <span class="action-label"><span class="fr">À FAIRE</span><span class="en">TO DO</span></span>
+      <span class="action-chip"><span class="fr">Relancer</span><span class="en">Follow up</span></span>
+    </div>
+  </div>
+
+  <!-- 22 RYNI TECH -->
+  <div class="project" data-status="fantome">
+    <div class="project-head">
+      <div class="project-num">22</div>
+      <div class="project-id">
+        <div class="project-name">Ryni Tech X Big House Marketing</div>
+        <div class="tags-row">
+          <span class="chip dev-none"><span class="fr">DEV • AUCUN</span><span class="en">DEV • NONE</span></span>
+          <span class="chip status-fantome"><span class="fr">FANTÔME</span><span class="en">GHOST</span></span>
+        </div>
+      </div>
+    </div>
+    <div class="project-body">
+      <p class="fr"><strong>Ils ont jamais rempli le form et ils ont disparu.</strong></p>
+      <p class="en"><strong>They never filled the form and disappeared.</strong></p>
+    </div>
+    <div class="project-actions">
+      <span class="action-label"><span class="fr">À FAIRE</span><span class="en">TO DO</span></span>
+      <span class="action-chip"><span class="fr">Aucune action</span><span class="en">No action</span></span>
+    </div>
+  </div>
+
+  <!-- 23 DIGITELLES -->
+  <div class="project" data-status="fantome">
+    <div class="project-head">
+      <div class="project-num">23</div>
+      <div class="project-id">
+        <div class="project-name">Digitelles.co X Big House Marketing</div>
+        <div class="tags-row">
+          <span class="chip dev-none"><span class="fr">DEV • AUCUN</span><span class="en">DEV • NONE</span></span>
+          <span class="chip status-fantome"><span class="fr">FANTÔME</span><span class="en">GHOST</span></span>
+        </div>
+      </div>
+    </div>
+    <div class="project-body">
+      <p class="fr">On a fait leur site, c'était validé, mais <strong>quand on est arrivé au domaine ils ont disparu</strong>.</p>
+      <p class="en">We did their website, it was validated, but <strong>when it came to the domain they disappeared</strong>.</p>
+    </div>
+    <div class="project-actions">
+      <span class="action-label"><span class="fr">À FAIRE</span><span class="en">TO DO</span></span>
+      <span class="action-chip"><span class="fr">Connecter domaine si retour</span><span class="en">Connect domain if back</span></span>
+    </div>
+  </div>
+
+  <!-- 24 STE PIAZZA -->
+  <div class="project" data-status="attente">
+    <div class="project-head">
+      <div class="project-num">24</div>
+      <div class="project-id">
+        <div class="project-name">Groupe Ste Piazza <span style="color: var(--text-tertiary); font-size: 14px; font-weight: 500;">(Site vitrine + acquisition leads)</span></div>
+        <div class="tags-row">
+          <span class="chip dev-none"><span class="fr">DEV • AUCUN</span><span class="en">DEV • NONE</span></span>
+          <span class="chip status-attente"><span class="fr">EN ATTENTE CLIENT</span><span class="en">WAITING CLIENT</span></span>
+        </div>
+      </div>
+    </div>
+    <a class="project-url" href="https://mintcream-gerbil-411795.hostingersite.com/" target="_blank">mintcream-gerbil-411795.hostingersite.com</a>
+    <div class="project-body">
+      <p class="fr">Le site est fait, il manque juste la validation finale et le domaine, mais <strong>le client disparaît et revient</strong>.</p>
+      <p class="en">The site is done, just needs final validation and the domain, but <strong>the client disappears and comes back</strong>.</p>
+    </div>
+    <div class="project-actions">
+      <span class="action-label"><span class="fr">À FAIRE</span><span class="en">TO DO</span></span>
+      <span class="action-chip"><span class="fr">Validation finale</span><span class="en">Final validation</span></span>
+      <span class="action-chip"><span class="fr">Connecter domaine</span><span class="en">Connect domain</span></span>
+    </div>
+  </div>
+
+  <!-- 25 APP ÉCOLES MAROCAINES -->
+  <div class="project" data-status="attente">
+    <div class="project-head">
+      <div class="project-num">25</div>
+      <div class="project-id">
+        <div class="project-name">App écoles marocaines</div>
+        <div class="tags-row">
+          <span class="chip dev-badr">DEV • BADR</span>
+          <span class="chip status-attente"><span class="fr">BLOQUÉ INTERNE</span><span class="en">INTERNAL BLOCK</span></span>
+        </div>
+      </div>
+    </div>
+    <div class="project-body">
+      <p class="fr">App pour des écoles marocaines, Badr est assigné dessus. <strong>On prend du retard parce qu'il est sur Fantino.</strong></p>
+      <p class="en">App for Moroccan schools, Badr is assigned to it. <strong>We're falling behind because he's on Fantino.</strong></p>
+    </div>
+    <div class="project-actions">
+      <span class="action-label"><span class="fr">À FAIRE</span><span class="en">TO DO</span></span>
+      <span class="action-chip"><span class="fr">Débloquer Badr après Fantino</span><span class="en">Unblock Badr after Fantino</span></span>
+      <span class="action-chip"><span class="fr">Rattraper le retard</span><span class="en">Catch up on schedule</span></span>
+    </div>
+  </div>
+
+  <!-- 26 MAFOU WEAR -->
+  <div class="project" data-status="attente">
+    <div class="project-head">
+      <div class="project-num">26</div>
+      <div class="project-id">
+        <div class="project-name">Mafou Wear X Big House</div>
+        <div class="tags-row">
+          <span class="chip dev-none"><span class="fr">DEV • AUCUN</span><span class="en">DEV • NONE</span></span>
+          <span class="chip status-attente"><span class="fr">EN ATTENTE CLIENT</span><span class="en">WAITING CLIENT</span></span>
+        </div>
+      </div>
+    </div>
+    <div class="project-body">
+      <p class="fr"><strong>Le client a besoin d'une relance pour valider le projet.</strong></p>
+      <p class="en"><strong>Client needs a follow-up to validate the project.</strong></p>
+    </div>
+    <div class="project-actions">
+      <span class="action-label"><span class="fr">À FAIRE</span><span class="en">TO DO</span></span>
+      <span class="action-chip"><span class="fr">Relancer client</span><span class="en">Follow up client</span></span>
+      <span class="action-chip"><span class="fr">Validation projet</span><span class="en">Project validation</span></span>
+    </div>
+  </div>
+
+  <!-- 27 CT INDUSTRY -->
+  <div class="project" data-status="attente">
+    <div class="project-head">
+      <div class="project-num">27</div>
+      <div class="project-id">
+        <div class="project-name">CT Industry X Big House</div>
+        <div class="tags-row">
+          <span class="chip dev-none"><span class="fr">DEV • AUCUN</span><span class="en">DEV • NONE</span></span>
+          <span class="chip status-attente"><span class="fr">EN ATTENTE CLIENT</span><span class="en">WAITING CLIENT</span></span>
+        </div>
+      </div>
+    </div>
+    <div class="project-body">
+      <p class="fr">On a refait le copywriting SEO pour son site, <strong>il doit valider, faut le relancer</strong>. On a aussi du boulot SEO avec lui après ça - une fois qu'il valide, <strong>Oumimma (freelancer) s'en occupe, faut juste la notifier</strong>.</p>
+      <p class="en">We redid the SEO copy for his website, <strong>he needs to validate, follow him up</strong>. We also have SEO work with him after that - once he validates, <strong>Oumimma (freelancer) will take care of it, just notify her</strong>.</p>
+    </div>
+    <div class="project-actions">
+      <span class="action-label"><span class="fr">À FAIRE</span><span class="en">TO DO</span></span>
+      <span class="action-chip"><span class="fr">Relancer client</span><span class="en">Follow up client</span></span>
+      <span class="action-chip"><span class="fr">Validation copy SEO</span><span class="en">SEO copy validation</span></span>
+      <span class="action-chip"><span class="fr">Notifier Oumimma</span><span class="en">Notify Oumimma</span></span>
+    </div>
+  </div>
+
+  <!-- 28 FRED LA DARONNE -->
+  <div class="project" data-status="bloque">
+    <div class="project-head">
+      <div class="project-num">28</div>
+      <div class="project-id">
+        <div class="project-name">Fred la Daronne <span style="color: var(--text-tertiary); font-size: 14px; font-weight: 500;">(funnel)</span></div>
+        <div class="tags-row">
+          <span class="chip dev-none"><span class="fr">DEV • AUCUN</span><span class="en">DEV • NONE</span></span>
+          <span class="chip status-bloque"><span class="fr">BLOQUÉ INTERNE</span><span class="en">INTERNAL BLOCK</span></span>
+        </div>
+      </div>
+    </div>
+    <div class="project-body">
+      <p class="fr"><strong>Le freelancer a fait un mauvais job sur le copywriting, c'est pas ce que je lui ai donné.</strong> Faut lui faire les changements avant de valider.</p>
+      <p class="en"><strong>The freelancer did a bad job on the copywriting, it's not what I gave him.</strong> Need to give him changes before validating.</p>
+    </div>
+    <div class="project-actions">
+      <span class="action-label"><span class="fr">À FAIRE</span><span class="en">TO DO</span></span>
+      <span class="action-chip"><span class="fr">Lister changements copy</span><span class="en">List copy changes</span></span>
+      <span class="action-chip"><span class="fr">Renvoyer au freelancer</span><span class="en">Send back to freelancer</span></span>
+      <span class="action-chip"><span class="fr">Valider après corrections</span><span class="en">Validate after fixes</span></span>
+    </div>
+  </div>
+
+  <!-- 29 PCS -->
+  <div class="project" data-status="attente">
+    <div class="project-head">
+      <div class="project-num">29</div>
+      <div class="project-id">
+        <div class="project-name">PCS - Professional Cleaning Service</div>
+        <div class="tags-row">
+          <span class="chip dev-none"><span class="fr">DEV • AUCUN</span><span class="en">DEV • NONE</span></span>
+          <span class="chip status-attente"><span class="fr">EN ATTENTE CLIENT</span><span class="en">WAITING CLIENT</span></span>
+        </div>
+      </div>
+    </div>
+    <a class="project-url" href="http://professionalcleaningservice.ma" target="_blank">professionalcleaningservice.ma</a>
+    <div class="project-body">
+      <p class="fr">Le domaine a besoin de docs pour être validé par le gouvernement. <strong>On attend que le client nous les fournisse.</strong></p>
+      <p class="en">The domain needs documents to be validated by the government. <strong>Waiting for the client to provide them.</strong></p>
+    </div>
+    <div class="project-actions">
+      <span class="action-label"><span class="fr">À FAIRE</span><span class="en">TO DO</span></span>
+      <span class="action-chip"><span class="fr">Récupérer docs client</span><span class="en">Get client docs</span></span>
+      <span class="action-chip"><span class="fr">Validation gov</span><span class="en">Gov validation</span></span>
+    </div>
+  </div>
+
+</section>
+
+<!-- ENDING -->
+<div class="ending">
+  <div class="line"></div>
+  <p class="fr">Voilà, c'est tout je crois pour l'instant. <strong style="color: var(--text-primary);">Si j'ai oublié quelque chose, contacte-moi, pas de soucis.</strong></p>
+  <p class="en">That's all I believe for now. <strong style="color: var(--text-primary);">If I missed something, contact me no problem.</strong></p>
+</div>
+
+<script>
+  const buttons = document.querySelectorAll('.lang-toggle-fixed button');
+  const body = document.body;
+
+  function setLang(lang) {
+    body.classList.remove('lang-fr', 'lang-en');
+    body.classList.add('lang-' + lang);
+    buttons.forEach(b => b.classList.toggle('active', b.dataset.lang === lang));
+    try { localStorage.setItem('handoff-lang', lang); } catch(e) {}
+  }
+
+  buttons.forEach(b => b.addEventListener('click', () => setLang(b.dataset.lang)));
+
+  try {
+    const saved = localStorage.getItem('handoff-lang');
+    if (saved === 'en' || saved === 'fr') setLang(saved);
+  } catch(e) {}
+</script>
+
+</body>
+</html>
+

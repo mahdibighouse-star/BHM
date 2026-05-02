@@ -1,0 +1,162 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    match /{document=**} {
+      allow read, write: if false;
+    }
+
+    function isValidId(id) {
+      return id is string && id.size() <= 128 && id.matches('^[a-zA-Z0-9_\\-]+$');
+    }
+
+    function incoming() { return request.resource.data; }
+    function existing() { return resource.data; }
+    function isSignedIn() { return request.auth != null; }
+    function isOwner(userId) { return isSignedIn() && request.auth.uid == userId; }
+
+    function isValidUser(data) {
+      return data.keys().hasAll(['email', 'role', 'createdAt']) &&
+             data.keys().size() == 3 &&
+             data.email is string && data.email.size() <= 256 &&
+             data.role is string && data.role.size() <= 64 &&
+             data.createdAt is timestamp;
+    }
+
+    match /users/{userId} {
+      allow read: if isOwner(userId);
+      allow create: if isOwner(userId) &&
+                       isValidId(userId) &&
+                       isValidUser(incoming()) &&
+                       incoming().createdAt == request.time;
+      allow update: if isOwner(userId) &&
+                       isValidUser(incoming()) &&
+                       incoming().createdAt == existing().createdAt &&
+                       (incoming().diff(existing()).affectedKeys().hasOnly(['role']));
+      allow delete: if false;
+    }
+
+    function isValidMemory(data) {
+      return data.keys().hasAll(['userId', 'content', 'type', 'createdAt', 'updatedAt']) &&
+             data.keys().size() == 5 &&
+             data.userId is string && data.userId.size() <= 128 &&
+             data.content is string && data.content.size() <= 4096 &&
+             data.type is string && data.type in ['fact', 'context', 'preference'] &&
+             data.createdAt is timestamp &&
+             data.updatedAt is timestamp;
+    }
+
+    match /memories/{memoryId} {
+      allow read: if isSignedIn() && existing().userId == request.auth.uid;
+      allow list: if isSignedIn() && resource.data.userId == request.auth.uid;
+      allow create: if isSignedIn() &&
+                       isValidId(memoryId) &&
+                       isValidMemory(incoming()) &&
+                       incoming().userId == request.auth.uid &&
+                       incoming().createdAt == request.time &&
+                       incoming().updatedAt == request.time;
+      allow update: if isSignedIn() &&
+                       existing().userId == request.auth.uid &&
+                       isValidMemory(incoming()) &&
+                       incoming().userId == existing().userId &&
+                       incoming().createdAt == existing().createdAt &&
+                       incoming().updatedAt == request.time &&
+                       (incoming().diff(existing()).affectedKeys().hasOnly(['content', 'type', 'updatedAt']));
+      allow delete: if isSignedIn() && existing().userId == request.auth.uid;
+    }
+
+    function isValidMessage(data) {
+      return data.keys().hasAll(['userId', 'sender', 'text', 'timestamp']) &&
+             (data.keys().size() == 4 || (data.keys().size() == 5 && data.keys().hasAll(['action']))) &&
+             data.userId is string && data.userId.size() <= 128 &&
+             data.sender is string && data.sender in ['user', 'commander'] &&
+             data.text is string && data.text.size() <= 10000 &&
+             (!('action' in data.keys()) || (data.action is string && data.action.size() <= 1000)) &&
+             data.timestamp is timestamp;
+    }
+
+    match /messages/{messageId} {
+      allow read: if isSignedIn() && existing().userId == request.auth.uid;
+      allow list: if isSignedIn() && resource.data.userId == request.auth.uid;
+      allow create: if isSignedIn() &&
+                       isValidId(messageId) &&
+                       isValidMessage(incoming()) &&
+                       incoming().userId == request.auth.uid &&
+                       incoming().timestamp == request.time;
+      allow update: if false;
+      allow delete: if false;
+    }
+
+    function isValidAgentLog(data) {
+      return data.keys().hasAll(['userId', 'tool', 'parameters', 'outcome', 'timestamp']) &&
+             data.keys().size() == 5 &&
+             data.userId is string && data.userId.size() <= 128 &&
+             data.tool is string && data.tool.size() <= 128 &&
+             data.parameters is string && data.parameters.size() <= 10000 &&
+             data.outcome is string && data.outcome.size() <= 10000 &&
+             data.timestamp is timestamp;
+    }
+
+    match /agent_logs/{logId} {
+      allow read: if isSignedIn() && existing().userId == request.auth.uid;
+      allow list: if isSignedIn() && resource.data.userId == request.auth.uid;
+      allow create: if isSignedIn() &&
+                       isValidId(logId) &&
+                       isValidAgentLog(incoming()) &&
+                       incoming().userId == request.auth.uid &&
+                       incoming().timestamp == request.time;
+      allow update: if false;
+      allow delete: if false;
+    }
+
+    function isValidPromptTemplate(data) {
+      return data.keys().hasAll(['userId', 'title', 'template', 'createdAt']) &&
+             (data.keys().size() == 4 || (data.keys().size() == 5 && data.keys().hasAll(['description']) && data.description is string && data.description.size() <= 1000)) &&
+             data.userId is string && data.userId.size() <= 128 &&
+             data.title is string && data.title.size() <= 200 &&
+             data.template is string && data.template.size() <= 10000 &&
+             data.createdAt is timestamp;
+    }
+
+    match /prompt_templates/{templateId} {
+      allow read: if isSignedIn() && existing().userId == request.auth.uid;
+      allow list: if isSignedIn() && resource.data.userId == request.auth.uid;
+      allow create: if isSignedIn() &&
+                       isValidId(templateId) &&
+                       isValidPromptTemplate(incoming()) &&
+                       incoming().userId == request.auth.uid &&
+                       incoming().createdAt == request.time;
+      allow update: if isSignedIn() &&
+                       isValidPromptTemplate(incoming()) &&
+                       existing().userId == request.auth.uid &&
+                       incoming().userId == existing().userId &&
+                       incoming().createdAt == existing().createdAt &&
+                       (
+                         incoming().diff(existing()).affectedKeys().hasOnly(['title', 'description', 'template']) ||
+                         incoming().diff(existing()).affectedKeys().hasOnly(['title', 'template'])
+                       );
+      allow delete: if isSignedIn() && existing().userId == request.auth.uid;
+    }
+    function isValidMemoryFile(data) {
+      return data.keys().hasAll(['userId', 'name', 'size', 'url', 'directive', 'timestamp']) &&
+             data.keys().size() == 6 &&
+             data.userId is string && data.userId.size() <= 128 &&
+             data.name is string && data.name.size() <= 500 &&
+             data.size is number &&
+             data.url is string && data.url.size() <= 2000 &&
+             data.directive is string && data.directive.size() <= 1000 &&
+             data.timestamp is timestamp;
+    }
+
+    match /memory_files/{fileId} {
+      allow read: if isSignedIn() && existing().userId == request.auth.uid;
+      allow list: if isSignedIn() && resource.data.userId == request.auth.uid;
+      allow create: if isSignedIn() &&
+                       isValidId(fileId) &&
+                       isValidMemoryFile(incoming()) &&
+                       incoming().userId == request.auth.uid &&
+                       incoming().timestamp == request.time;
+      allow update: if false;
+      allow delete: if isSignedIn() && existing().userId == request.auth.uid;
+    }
+  }
+}

@@ -1,0 +1,148 @@
+{
+  "entities": {
+    "User": {
+      "title": "User",
+      "description": "A user of the dashboard (the agency owner).",
+      "type": "object",
+      "properties": {
+        "email": {
+          "type": "string"
+        },
+        "role": {
+          "type": "string"
+        },
+        "createdAt": {
+          "type": "number"
+        }
+      },
+      "required": ["email", "role", "createdAt"]
+    },
+    "Memory": {
+      "title": "Memory",
+      "description": "A context element or fact stored by the AI commander.",
+      "type": "object",
+      "properties": {
+        "userId": {
+          "type": "string"
+        },
+        "content": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string",
+          "enum": ["fact", "context", "preference"]
+        },
+        "createdAt": {
+          "type": "number"
+        },
+        "updatedAt": {
+          "type": "number"
+        }
+      },
+      "required": ["userId", "content", "type", "createdAt", "updatedAt"]
+    },
+    "ChatMessage": {
+      "title": "ChatMessage",
+      "description": "A chat message in the AI Commander chat.",
+      "type": "object",
+      "properties": {
+        "userId": {
+          "type": "string"
+        },
+        "sender": {
+          "type": "string",
+          "enum": ["user", "commander"]
+        },
+        "text": {
+          "type": "string"
+        },
+        "action": {
+          "type": "string"
+        },
+        "timestamp": {
+          "type": "number"
+        }
+      },
+      "required": ["userId", "sender", "text", "timestamp"]
+    },
+    "AgentLog": {
+      "title": "AgentLog",
+      "description": "Log entry for AI agent tool usage.",
+      "type": "object",
+      "properties": {
+        "userId": {
+          "type": "string"
+        },
+        "tool": {
+          "type": "string"
+        },
+        "parameters": {
+          "type": "string"
+        },
+        "outcome": {
+          "type": "string"
+        },
+        "timestamp": {
+          "type": "number"
+        }
+      },
+      "required": ["userId", "tool", "parameters", "outcome", "timestamp"]
+    },
+    "PromptTemplate": {
+      "title": "PromptTemplate",
+      "description": "A saved prompt engineering template.",
+      "type": "object",
+      "properties": {
+        "userId": {
+          "type": "string"
+        },
+        "title": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "template": {
+          "type": "string"
+        },
+        "createdAt": {
+          "type": "number"
+        }
+      },
+      "required": ["userId", "title", "template", "createdAt"]
+    }
+  },
+  "firestore": {
+    "/users/{userId}": {
+      "schema": {
+        "$ref": "#/entities/User"
+      },
+      "description": "Users of the application."
+    },
+    "/memories/{memoryId}": {
+      "schema": {
+        "$ref": "#/entities/Memory"
+      },
+      "description": "Memories stored by the AI. Global collection scoped by userId."
+    },
+    "/messages/{messageId}": {
+      "schema": {
+        "$ref": "#/entities/ChatMessage"
+      },
+      "description": "Chat messages between the user and the AI."
+    },
+    "/agent_logs/{logId}": {
+      "schema": {
+        "$ref": "#/entities/AgentLog"
+      },
+      "description": "Logs of tools used by AI agent."
+    },
+    "/prompt_templates/{templateId}": {
+      "schema": {
+        "$ref": "#/entities/PromptTemplate"
+      },
+      "description": "Templates for prompt engineering."
+    }
+  }
+}
+
